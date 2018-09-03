@@ -1,0 +1,32 @@
+{
+  "name": "migrate-ngjs",
+  "version": "1.0.0",
+  "description": "migrating angularjs to single-spa",
+  "scripts": {
+    "start": "webpack-dev-server",
+    "build": "webpack --config webpack.config.js -p"
+  },
+  "author": "Faris Baros",
+  "license": "MIT",
+  "dependencies": {
+    "angular": "^1.7.3",
+    "angular-ui-router": "^1.0.20",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-latest": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "clean-webpack-plugin": "^0.1.19",
+    "copy-webpack-plugin": "^4.5.2",
+    "css-loader": "^1.0.0",
+    "html-loader": "^0.5.5",
+    "single-spa": "^4.0.1",
+    "single-spa-angularjs": "^3.0.1",
+    "style-loader": "^0.23.0",
+    "webpack": "^4.17.1",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.6"
+  }
+}

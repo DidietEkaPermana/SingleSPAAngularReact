@@ -1,70 +1,114 @@
+const webpack = require('webpack');
 const path = require('path');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-module.exports = {
-	entry: {
-		'single-spa-config': 'single-spa.config.js',
-	},
-	output: {
-		publicPath: '',
-		filename: '[name].js',
-		path: path.resolve(__dirname, 'release'),
-	},
-	module: {
-		rules: [
-            {
-                test: /\.css$/,
-                use: ['style-loader','css-loader']
-            },
-            {
-                test:/\.js$/,
-                exclude: [path.resolve(__dirname,'node_modules')],
-                loader: 'babel-loader',
-            },
-            {
-                test: /\.html$/,
-                exclude: /node_modules/,
-                loader: 'html-loader',
-            },
-        ],
-	},
-	node: {
-		fs: 'empty'
-	},
-	resolve: {
-		modules: [
-			__dirname,
-			'node_modules',
-		],
-	},
-	plugins: [
-        new CopyWebpackPlugin([
-            {from: path.resolve(__dirname, 'index.html')},
-			{from: path.resolve(__dirname, 'src/ng1'), to: "ng1"},
-			{from: path.resolve(__dirname, 'src/js'), to: "js"}
-        ]),
-		new CleanWebpackPlugin(['release'])
-	],
-	devtool: 'source-map',
-	externals: [
-	],
-    mode: 'development',
+const extractCSS = new ExtractTextPlugin('[name].fonts.css');
+const extractSCSS = new ExtractTextPlugin('[name].styles.css');
+
+const BUILD_DIR = path.resolve(__dirname, 'build');
+const SRC_DIR = path.resolve(__dirname, 'src');
+
+console.log('BUILD_DIR', BUILD_DIR);
+console.log('SRC_DIR', SRC_DIR);
+
+module.exports = (env = {}) => {
+  return {
+    entry: {
+      // index: [SRC_DIR + '/index.js']
+      'single-spa-config':[SRC_DIR + '/single-spa.config.js']
+    },
+    output: {
+      path: BUILD_DIR,
+      filename: '[name].bundle.js'
+    },
+    // watch: true,
+    devtool: env.prod ? 'source-map' : 'cheap-module-eval-source-map',
     devServer: {
-		contentBase: './release',
-        historyApiFallback: true,
-        watchOptions: { aggregateTimeout: 300, poll: 1000 },
-        headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
-            "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
+      contentBase: BUILD_DIR,
+      //   port: 9001,
+      // compress: true,
+      // hot: true,
+      // open: true
+    },
+    module: {
+      rules: [
+        {
+          test: /\.(js|jsx)$/,
+          exclude: /node_modules/,
+          use: {
+            loader: 'babel-loader',
+            options: {
+              cacheDirectory: true,
+              presets: ['react', 'env']
+            }
+          }
         },
-		// Proxy config for development purposes. In production, you would configure you webserver to do something similar.
-        // proxy: {
-        //     "/app5": {
-        //         target: "http://localhost:9005",
-        //         pathRewrite: {"^/app5" : ""}
-        //     }
-        // }
-    }
+        {
+          test: /\.html$/,
+          loader: 'html-loader'
+        },
+        {
+          test: /\.(scss)$/,
+          use: ['css-hot-loader'].concat(extractSCSS.extract({
+            fallback: 'style-loader',
+            use: [
+              {
+                loader: 'css-loader',
+                options: {alias: {'../img': '../public/img'}}
+              },
+              {
+                loader: 'sass-loader'
+              }
+            ]
+          }))
+        },
+        {
+          test: /\.css$/,
+          use: extractCSS.extract({
+            fallback: 'style-loader',
+            use: 'css-loader'
+          })
+        },
+        {
+          test: /\.(png|jpg|jpeg|gif|ico)$/,
+          use: [
+            {
+              // loader: 'url-loader'
+              loader: 'file-loader',
+              options: {
+                name: './img/[name].[hash].[ext]'
+              }
+            }
+          ]
+        },
+        {
+          test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+          loader: 'file-loader',
+          options: {
+            name: './fonts/[name].[hash].[ext]'
+          }
+        }]
+    },
+    plugins: [
+      new webpack.HotModuleReplacementPlugin(),
+      new webpack.optimize.UglifyJsPlugin({sourceMap: true}),
+      new webpack.NamedModulesPlugin(),
+      extractCSS,
+      extractSCSS,
+      // new HtmlWebpackPlugin(
+      //   {
+      //     inject: true,
+      //     template: './public/index.html'
+      //   }
+      // ),
+      new CopyWebpackPlugin([
+          {from: './public/img', to: 'img'},
+          {from: './src/angularjs', to: 'angularjs'}
+        ],
+        {copyUnmodified: false}
+      )
+    ]
+  }
 };

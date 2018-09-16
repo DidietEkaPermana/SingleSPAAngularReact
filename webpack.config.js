@@ -30,7 +30,7 @@ module.exports = (env = {}) => {
       //   port: 9001,
       // compress: true,
       // hot: true,
-      // open: true
+      // open: "http://localhost:8080/#/angularjs/login"
     },
     module: {
       rules: [
@@ -97,14 +97,15 @@ module.exports = (env = {}) => {
       new webpack.NamedModulesPlugin(),
       extractCSS,
       extractSCSS,
-      // new HtmlWebpackPlugin(
-      //   {
-      //     inject: true,
-      //     template: './public/index.html'
-      //   }
-      // ),
+      new HtmlWebpackPlugin(
+        {
+          inject: true,
+          template: './public/index.html'
+        }
+      ),
       new CopyWebpackPlugin([
           {from: './public/img', to: 'img'},
+          {from: './public/js', to: 'js'},
           {from: './src/angularjs', to: 'angularjs'}
         ],
         {copyUnmodified: false}

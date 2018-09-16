@@ -2,9 +2,12 @@ angular
 .module('app')
 .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', '$breadcrumbProvider','$locationProvider', function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $breadcrumbProvider,$locationProvider) {
   $locationProvider.hashPrefix('');
+  // if(window.location.href.toString() = "http://localhost:8080"){
+  //   $locationProvider.path('/#/angularjs/login')
+  // }
   // $locationProvider.baseHref = "/angularjs/";
 
-  // $urlRouterProvider.otherwise('/login');
+  // $urlRouterProvider.otherwise('/angularjs/login');
 
   $ocLazyLoadProvider.config({
     // Set to true if you want to see what and when is dynamically loaded
@@ -105,7 +108,7 @@ angular
 
   // Additional Pages
   .state('appSimple.login', {
-    url: '/login',
+    url: '/angularjs/login',
     templateUrl: 'angularjs/src/views/pages/login.html',
     controller: 'loginCtrl',
     resolve: {
@@ -118,15 +121,15 @@ angular
     }
   })
   .state('appSimple.register', {
-    url: '/register',
+    url: '/angularjs/register',
     templateUrl: 'angularjs/src/views/pages/register.html'
   })
   .state('appSimple.404', {
-    url: '/404',
+    url: '/angularjs/404',
     templateUrl: 'angularjs/src/views/pages/404.html'
   })
   .state('appSimple.500', {
-    url: '/500',
+    url: '/angularjs/500',
     templateUrl: 'angularjs/src/views/pages/500.html'
   })
 }]);

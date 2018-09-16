@@ -1,18 +1,21 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
-    <meta name="author" content="Łukasz Holeczek">
-    <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,AngularJS,Angular,Angular2,Angular 2,Angular4,Angular 4,jQuery,CSS,HTML,RWD,Dashboard,React,React.js,Vue,Vue.js">
-    <link rel="shortcut icon" href="img/favicon.png">
-    <!-- <link href="angularjs/src/css/style.css" rel="stylesheet"> -->
-    <title>CoreUI - Open Source Bootstrap Admin Template</title>
-  </head>
 
-  <!-- BODY options, add following classes to body to change options
+<head>
+  <!-- <base href="http://localhost:8080/#/angularjs/login"> -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
+  <meta name="author" content="Łukasz Holeczek">
+  <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,AngularJS,Angular,Angular2,Angular 2,Angular4,Angular 4,jQuery,CSS,HTML,RWD,Dashboard,React,React.js,Vue,Vue.js">
+  <link rel="shortcut icon" href="img/favicon.png">
+  <title>CoreUI - Open Source Bootstrap Admin Template</title>
+
+  <link href="angularjs/src/css/style.css" type="text/css" rel="stylesheet">
+</head>
+
+<!-- BODY options, add following classes to body to change options
 
   // Header options
   1. '.header-fixed'					- Fixed Header
@@ -40,32 +43,36 @@
 
   -->
 
-  <body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden footer-fixed">
-    <div id="react-app"></div>
-    <div id="angularjs-app"></div>
+<body class="header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden footer-fixed">
+  <div id="angularjslogin-app"></div>
+  <div id="angularjs-app"></div>
+  <div id="react-app"></div>
 
-    <!-- Bootstrap and necessary plugins -->
-    <script src="angularjs/plugin/jquery.min.js"></script>
-    <script src="angularjs/plugin/popper.min.js"></script>
-    <script src="angularjs/plugin/bootstrap.min.js"></script>
-    <!-- AngularJS -->
-    <script src="angularjs/plugin/angular.min.js"></script>
+  <script type="text/javascript" src="cordova.js"></script>
+  <script type="text/javascript" src="js/index.js"></script>
 
-    <!-- AngularJS plugins -->
-    <script src="angularjs/plugin/angular-animate.min.js"></script>
-    <script src="angularjs/plugin/angular-sanitize.min.js"></script>
-    <script src="angularjs/plugin/angular-ui-router.min.js"></script>
-    <script src="angularjs/plugin/ocLazyLoad.min.js"></script>
-    <script src="angularjs/plugin/angular-breadcrumb.min.js"></script>
-    <script src="angularjs/plugin/loading-bar.min.js"></script>
+  <!-- Bootstrap and necessary plugins -->
+  <script src="angularjs/plugin/jquery.min.js"></script>
+  <script src="angularjs/plugin/popper.min.js"></script>
+  <script src="angularjs/plugin/bootstrap.min.js"></script>
+  <!-- AngularJS -->
+  <script src="angularjs/plugin/angular.min.js"></script>
 
-    <!-- AngularJS CoreUI App scripts -->
-    <script src="angularjs/src/js/app.js"></script>
-    <script src="angularjs/src/js/routes.js"></script>
-    <script src="angularjs/src/js/demo/routes.js"></script>
-    <script src="angularjs/src/js/controllers.js"></script>
-    <script src="angularjs/src/js/directives.js"></script>
-    <!--
+  <!-- AngularJS plugins -->
+  <script src="angularjs/plugin/angular-animate.min.js"></script>
+  <script src="angularjs/plugin/angular-sanitize.min.js"></script>
+  <script src="angularjs/plugin/angular-ui-router.min.js"></script>
+  <script src="angularjs/plugin/ocLazyLoad.min.js"></script>
+  <script src="angularjs/plugin/angular-breadcrumb.min.js"></script>
+  <script src="angularjs/plugin/loading-bar.min.js"></script>
+
+  <!-- AngularJS CoreUI App scripts -->
+  <script src="angularjs/src/js/app.js"></script>
+  <script src="angularjs/src/js/routes.js"></script>
+  <script src="angularjs/src/js/demo/routes.js"></script>
+  <script src="angularjs/src/js/controllers.js"></script>
+  <script src="angularjs/src/js/directives.js"></script>
+  <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
 
@@ -75,5 +82,17 @@
       To begin the development, run `npm start`.
       To create a production bundle, use `npm run build`.
     -->
-  </body>
+</body>
+
 </html>
+<!-- <script>
+  console.log(window.location);
+  if(window.location.href === window.location.origin + "/"){
+    console.log("redirect");
+    window.location = window.location.origin + "/#/angularjs/login";
+  } else if(window.location.origin === "file://"){
+    console.log("it's mobile");
+    if(window.location.href === "file:///android_asset/www/index.html")
+      window.location = window.location.href + "#/angularjs/login";
+  }
+</script> -->

@@ -38,7 +38,7 @@ class Header extends Component {
 
   render() {
     return (
-      <header className="app-header navbar">
+      <header className="reactbar app-header navbar">
         <NavbarToggler className="d-lg-none" onClick={this.mobileSidebarToggle}>
           <span className="navbar-toggler-icon"></span>
         </NavbarToggler>

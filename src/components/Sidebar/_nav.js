@@ -140,26 +140,29 @@ export default {
       children: [
         {
           name: 'Dashboard',
-          url: 'http://localhost:8080/#/angularjs/dashboard',
+          url: '#/angularjs/dashboard',
           icon: 'icon-speedometer',
           badge: {
             variant: 'info',
             text: 'NEW'
-          }
+          },
+          isExternalApp: true
         },
         {
           name: 'Widgets',
-          url: 'http://localhost:8080/#/angularjs/widgets',
+          url: '#/angularjs/widgets',
           icon: 'icon-calculator',
           badge: {
             variant: 'info',
             text: 'NEW'
-          }
+          },
+          isExternalApp: true
         },
         {
           name: 'Charts',
-          url: 'http://localhost:8080/#/angularjs/charts',
-          icon: 'icon-pie-chart'
+          url: '#/angularjs/charts',
+          icon: 'icon-pie-chart',
+          isExternalApp: true
         }
       ]
     },
